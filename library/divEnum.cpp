@@ -2,7 +2,7 @@
 Nの約数をvectorに格納
 戻り値はvector<ll>
 */
-vector<long long> divEnum(long long N) {
+vector<ll> divEnum(ll N) {
     vector<ll> num1, num2;
     for (ll i = 1; i * i <= N; i ++) {
         if (N % i == 0) {
