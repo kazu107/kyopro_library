@@ -1,6 +1,6 @@
 /*
 Nの約数をvectorに格納
-戻り値はvector<ll>
+戻り値はvector<ll>/
 */
 vector<ll> divEnum(ll N) {
     vector<ll> num1, num2;
