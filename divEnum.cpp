@@ -10,7 +10,7 @@ vector<ll> divEnum(ll N) {
             num2.push_back(N / i);
         }
     }
-    if (num1[(int)num1.size()] == num2[(int)num2.size()]) num2.pop_back();
+    if (num1[(int)num1.size() - 1] == num2[(int)num2.size() - 1]) num2.pop_back();
     for (int i = (int)num2.size() - 1; i >= 0; i --) {
         num1.push_back(num2[i]);
     }
