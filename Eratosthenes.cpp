@@ -1,5 +1,5 @@
 /*
-１からNまでの素数をvectorに入れる。
+１からNまでの素数をvectorに入れる.
 戻り値はvector<ll>
 */
 vector<long long> Eratosthenes(long long N) {
