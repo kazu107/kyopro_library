@@ -1,3 +1,4 @@
+//x^y%z 
 long long modint(long long x, long long y, long long z) {
     if (y == 0) return 1;
     else if (y % 2 == 0) {
