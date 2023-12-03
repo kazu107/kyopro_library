@@ -1,3 +1,4 @@
+//文字列で受け取った大きい整数を任意のmodであれできる
 ll mod_of_large_int(string large_int, ll mod) {
     ll remainder = 0;
     for (int i = 0; i < large_int.length(); i++) {
