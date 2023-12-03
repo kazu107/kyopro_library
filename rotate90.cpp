@@ -1,6 +1,6 @@
 //rotate_poly(回転させたい2次元配列)
-//時計回りに９０度回転
-//２次元配列なら改造可
+//時計回りに９０度回転!
+//２次元配列なら改造可!
 
 void Rotate90(vector<string> &vec) {//string ver.
     int x = (int)vec.size(), y = (int)vec[0].size();
