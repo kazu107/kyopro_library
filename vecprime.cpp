@@ -1,3 +1,4 @@
+//素数列挙...
 vector<int> vecprime(int n){
     vector<bool> prime1(n+1, true);
     for(int i = 2; i*i <= n; i++){
