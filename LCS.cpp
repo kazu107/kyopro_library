@@ -1,3 +1,4 @@
+//最長共通部分列
 string lcs (string s, string t) {
     int s_len = (int)s.size(), t_len = (int)t.size();
     vector<vector<int>> vec(s_len + 1, vector<int>(t_len + 1));
