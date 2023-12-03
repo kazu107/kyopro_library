@@ -1,4 +1,4 @@
-//nを素因数分解をする。a^bの形でvector<pair<int, int>>に格納
+//nを素因数分解をする。a^bの形でvector<pair<int, int>>に格納.
 
 vector<pair<int, int>> Factorize(ll n){
     vector<bool> prime1(n+1, true);
