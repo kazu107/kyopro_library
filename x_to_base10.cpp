@@ -1,4 +1,5 @@
-int base_x(string N, int x) { //x進数の整数Nを10進数に変換する
+//x進数の整数Nを10進数に変換する
+int base_x(string N, int x) {
     int ans = 0;
     int d = 0;
     for (int i = N.size() - 1; i >= 0; i--) {
