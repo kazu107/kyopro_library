@@ -1,3 +1,5 @@
+// https://github.com/kazu107/kyopro_library/blob/main/data_structure/SegTree.cpp
+// SPDX-License-Identifier: CC0-1.0
 //セグメントツリーの構造体
 struct SegTree {
     int tr[300000], trsize = 1;// trはtreeの配列、trsizeはtreeのサイズ

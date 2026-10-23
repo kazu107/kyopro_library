@@ -1,3 +1,5 @@
+// https://github.com/kazu107/kyopro_library/blob/main/prefix_sum/Rangesum.cpp
+// SPDX-License-Identifier: CC0-1.0
 /*
 Rangesum(累積和をとった配列, 範囲のはじめ, 終わり)
 0 <= l, r <= len - 1

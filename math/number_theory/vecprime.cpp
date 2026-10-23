@@ -1,3 +1,5 @@
+// https://github.com/kazu107/kyopro_library/blob/main/math/number_theory/vecprime.cpp
+// SPDX-License-Identifier: CC0-1.0
 //素数列挙...
 vector<int> vecprime(int n){
     vector<bool> prime1(n+1, true);

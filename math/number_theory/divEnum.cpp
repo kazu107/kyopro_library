@@ -1,3 +1,5 @@
+// https://github.com/kazu107/kyopro_library/blob/main/math/number_theory/divEnum.cpp
+// SPDX-License-Identifier: CC0-1.0
 /*
 Nの約数をvectorに格納
 戻り値はvector<ll>/

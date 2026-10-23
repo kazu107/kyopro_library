@@ -1,3 +1,5 @@
+// https://github.com/kazu107/kyopro_library/blob/main/math/number_theory/prime_factorization.cpp
+// SPDX-License-Identifier: CC0-1.0
 // nの素因数分解を行う。O(√n)
 vector<pair<ll, ll>> prime_factorization(ll n) {
     vector<pair<ll, ll>> res;

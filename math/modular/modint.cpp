@@ -1,3 +1,5 @@
+// https://github.com/kazu107/kyopro_library/blob/main/math/modular/modint.cpp
+// SPDX-License-Identifier: CC0-1.0
 //x^y%z 
 long long modint(long long x, long long y, long long z) {
     if (y == 0) return 1;

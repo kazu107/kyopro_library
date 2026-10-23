@@ -1,3 +1,5 @@
+// https://github.com/kazu107/kyopro_library/blob/main/two_pointers/longestUniqueSubarray.cpp
+// SPDX-License-Identifier: CC0-1.0
 // 配列内の要素が全て異なる部分列の最大長を求める
 // 計算量 O(N)
 int longestUniqueSubarray(vector<int>& nums) {

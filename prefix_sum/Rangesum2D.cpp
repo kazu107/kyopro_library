@@ -1,3 +1,5 @@
+// https://github.com/kazu107/kyopro_library/blob/main/prefix_sum/Rangesum2D.cpp
+// SPDX-License-Identifier: CC0-1.0
 //Rangesum2D(２次元累積和をとった２次元配列, 範囲のはじめ行, 範囲のはじめ列, 終わり行, 終わり列)
 //0 <= a, b, c, d <= len - 1
 

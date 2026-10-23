@@ -1,3 +1,5 @@
+// https://github.com/kazu107/kyopro_library/blob/main/math/base_conversion/x_to_base10.cpp
+// SPDX-License-Identifier: CC0-1.0
 //x進数の整数Nを10進数に変換する
 int base_x(string N, int x) {
     int ans = 0;

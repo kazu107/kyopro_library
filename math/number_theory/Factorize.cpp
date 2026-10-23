@@ -1,3 +1,5 @@
+// https://github.com/kazu107/kyopro_library/blob/main/math/number_theory/Factorize.cpp
+// SPDX-License-Identifier: CC0-1.0
 //nを素因数分解をする。a^bの形でvector<pair<int, int>>に格納.
 
 vector<pair<int, int>> Factorize(ll n){

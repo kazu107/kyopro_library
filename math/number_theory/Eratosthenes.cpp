@@ -1,3 +1,5 @@
+// https://github.com/kazu107/kyopro_library/blob/main/math/number_theory/Eratosthenes.cpp
+// SPDX-License-Identifier: CC0-1.0
 /*
 １からNまでの素数をvectorに入れる.
 戻り値はvector<ll>

@@ -1,3 +1,5 @@
+// https://github.com/kazu107/kyopro_library/blob/main/string/LCS.cpp
+// SPDX-License-Identifier: CC0-1.0
 //最長共通部分列
 string lcs (string s, string t) {
     int s_len = (int)s.size(), t_len = (int)t.size();

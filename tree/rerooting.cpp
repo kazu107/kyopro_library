@@ -1,3 +1,5 @@
+// https://github.com/kazu107/kyopro_library/blob/main/tree/rerooting.cpp
+// SPDX-License-Identifier: CC0-1.0
 struct Rerooting {
     using DP = long long; // DPの型
 

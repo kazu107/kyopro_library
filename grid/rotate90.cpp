@@ -1,3 +1,5 @@
+// https://github.com/kazu107/kyopro_library/blob/main/grid/rotate90.cpp
+// SPDX-License-Identifier: CC0-1.0
 //rotate_poly(回転させたい2次元配列)
 //時計回りに９０度回転!
 //２次元配列なら改造可!
