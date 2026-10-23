@@ -168,3 +168,55 @@ mkdir build
 g++ -std=c++17 -O2 -Wall -Wextra -Werror tests/lazy_segtree_test.cpp -o build/lazy_segtree_test
 ./build/lazy_segtree_test
 ```
+
+## Union-Find
+
+新規のUnion-FindはGNU C++17以降、名前空間 `cp` です。
+頂点番号は0始まりで、必要なヘッダを自身でincludeします。
+
+| ファイル | 主な操作 | 計算量 |
+| --- | --- | --- |
+| [UnionFind.hpp](UnionFind.hpp) | `merge, leader, same, size, component_count, groups` | 初期化O(V)、通常の操作は償却O(alpha(V)) |
+| [WeightedUnionFind.hpp](WeightedUnionFind.hpp) | 差の制約の追加、矛盾判定、差の取得 | 初期化O(V)、償却O(alpha(V)) |
+| [RollbackUnionFind.hpp](RollbackUnionFind.hpp) | 結合、undo、snapshot、rollback | 結合/検索O(log V)、undo O(1) |
+
+`UnionFind::merge(u,v)` は実際に結合したときtrue、既に連結ならfalseです。
+`groups()` は成分ごとの頂点一覧で、O(V alpha(V))です。辺の削除には対応しません。
+
+`WeightedUnionFind<T = long long>::merge(u,v,w)` は `value[v]-value[u]=w` を追加します。
+戻り値は「矛盾しないか」で、同じ成分でも差が整合すればtrueです。
+`diff(u,v)` は非連結ならnullopt、連結なら `value[v]-value[u]` を返します。
+矛盾した制約は取り込みません。差や途中計算はT型に収めてください。
+
+`RollbackUnionFind` は経路圧縮を行いません。
+`snapshot()` のトークンを保存して `rollback(token)` で戻せます。
+`undo()` はmerge呼び出し1回分を取り消し、結合しなかった呼び出しも1回に数えます。
+トークンは現在の履歴の祖先に限り、巻き戻して破棄した未来のトークンは再利用しないでください。
+rollbackは戻す呼び出し数に比例し、メモリはO(V+保持する呼び出し数)です。
+
+```cpp
+#include <iostream>
+#include "data_structure/UnionFind.hpp"
+#include "data_structure/WeightedUnionFind.hpp"
+#include "data_structure/RollbackUnionFind.hpp"
+
+int main() {
+    cp::UnionFind uf(3);
+    uf.merge(0, 1);
+    std::cout << uf.size(0) << '\n'; // 2
+
+    cp::WeightedUnionFind<> weighted(3);
+    weighted.merge(0, 1, 4);
+    weighted.merge(1, 2, -1);
+    std::cout << *weighted.diff(0, 2) << '\n'; // 3
+
+    cp::RollbackUnionFind rollback(3);
+    auto token = rollback.snapshot();
+    rollback.merge(0, 1);
+    rollback.rollback(token);
+    std::cout << rollback.same(0, 1) << '\n'; // 0
+}
+```
+
+[union_find_test.cpp](../tests/union_find_test.cpp) で、合計20,000操作を
+BFSによる連結性、既知のポテンシャル差、履歴の削除と照合します。
