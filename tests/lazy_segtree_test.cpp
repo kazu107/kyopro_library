@@ -1,14 +1,18 @@
 // https://github.com/kazu107/kyopro_library/blob/main/tests/lazy_segtree_test.cpp
 // SPDX-License-Identifier: CC0-1.0
+/*
+できること: 遅延セグメント木8種類と独自ルールを配列の直接更新・走査と照合する。
+使い方:
+  python tests/run_tests.py // このテストを含む全テストを実行。--debugで境界チェックを有効化。
+前提: このファイル単体にはヘッダを含めない。依存コードと標準ヘッダはテストランナーが補い、assertを有効にする。
+計算量: ケース数と全列挙の規模に依存。固定seedの比較テストと境界条件を実行。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: data_structure/LagySegTree.cpp
+
 // 配列の直接更新・走査を正解として照合するC++17テスト。
 // 空区間、非2冪長、負数、同値の個数と左端の位置、一点代入、再構築、更新の合成順序を確認。
-#include "../data_structure/LagySegTree.cpp"
 
-#include <iostream>
-#include <numeric>
-#include <random>
-#include <string>
-#include <type_traits>
 
 #ifdef NDEBUG
 #error "Run these tests with assertions enabled."

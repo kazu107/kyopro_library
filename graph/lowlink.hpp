@@ -1,8 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/graph/lowlink.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include "Graph.hpp"
-#include <algorithm>
+/*
+できること: 無向グラフの橋と関節点、およびDFSの訪問順・low値を求める。
+使い方:
+  auto result = cp::lowlink(g);
+  auto bridge_ids = result.bridges; auto cut_vertices = result.articulation_points;
+前提: 0始まり、無向グラフ専用。橋は辺ID、関節点は頂点番号でともに昇順。非連結・多重辺・自己ループ可。
+計算量: O(V+E)、メモリO(V+E)。明示スタックで探索する。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: graph/Graph.hpp
+
 
 namespace cp {
 struct LowlinkResult {

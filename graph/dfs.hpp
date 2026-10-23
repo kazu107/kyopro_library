@@ -1,7 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/graph/dfs.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include "Graph.hpp"
+/*
+できること: 全頂点をDFSの森として探索し、親・深さ・根・訪問順・退出順を取得する。
+使い方:
+  auto result = cp::dfs_forest(g);
+  auto order = result.order; auto postorder = result.postorder; int parent = result.parent[v];
+前提: 0始まり、有向・無向とも可。root[v]はDFS木の根で強/弱連結成分番号ではない。tin/toutは2V個のイベント時刻。
+計算量: O(V+E)、追加メモリO(V)。明示スタックで探索する。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: graph/Graph.hpp
+
 
 namespace cp {
 struct DfsForest {

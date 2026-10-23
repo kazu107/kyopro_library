@@ -1,9 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/tree/Lca.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include "RootedForest.hpp"
-#include <optional>
-#include <utility>
+/*
+できること: 最近共通祖先、k個上の祖先、2頂点間の距離、経路上k番目の頂点を求める。
+使い方:
+  cp::Lca<long long> index(g, root); int ancestor = index.lca(u, v);
+  auto distance = index.distance(u, v); int node = index.kth_on_path(u, v, k); // uが0番目。
+前提: 0始まり、無向の木・森。別成分のlca/kth_on_pathは-1、distanceはnullopt。kth_ancestorの範囲外も-1。途中計算をCostに収める。
+計算量: 構築O(V log V)、取得O(log V)、メモリO(V log V)。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: tree/RootedForest.hpp
+
 
 namespace cp {
 // Lca<> lca(g,root); lca.lca(u,v); lca.kth_ancestor(v,k); lca.distance(u,v);

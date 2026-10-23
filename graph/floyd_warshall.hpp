@@ -1,7 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/graph/floyd_warshall.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include "Graph.hpp"
+/*
+できること: 全頂点対の最短距離、負閉路の影響、頂点列・辺ID列の復元を求める。
+使い方:
+  auto result = cp::floyd_warshall(g);
+  if (result.finite(s, t)) { auto distance = result.dist[s][t]; auto path = result.path(s, t); }
+前提: 0始まり、符号付き整数重み。負辺可。sから負閉路を経由してtへ行ける場合はnegative[s][t]=true、距離-INF。
+計算量: O(V^3)、メモリO(V^2)。有限の単純路の途中の和は(-INF,INF)内。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: graph/Graph.hpp
+
 
 namespace cp {
 template <class Cost>

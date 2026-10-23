@@ -1,6 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/math/number_theory/divEnum.cpp
 // SPDX-License-Identifier: CC0-1.0
 /*
+できること: 正の整数の約数を昇順に列挙する。
+使い方:
+  vector<ll> divisors = divEnum(12); // {1,2,3,4,6,12}。
+前提: N>0、i*iの計算がlong long内。using ll = long longとstdの名前解決を用意する。
+計算量: 時間O(sqrt(N))、約数の個数をDとしてメモリO(D)。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: なし
+
+/*
 Nの約数をvectorに格納
 戻り値はvector<ll>/
 */

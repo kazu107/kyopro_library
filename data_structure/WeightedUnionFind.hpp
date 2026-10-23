@@ -1,10 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/data_structure/WeightedUnionFind.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include <algorithm>
-#include <cassert>
-#include <optional>
-#include <vector>
+/*
+できること: value[v]-value[u]=wという差の制約を管理し、矛盾の有無や2頂点間の差を取得する。
+使い方:
+  cp::WeightedUnionFind<long long> uf(n); bool consistent = uf.merge(u, v, w);
+  auto difference = uf.diff(u, v); // 非連結ならnullopt。連結ならvalue[v]-value[u]。
+前提: 頂点は0始まり。mergeのtrueは整合性を示し、既に同じ成分の場合も検査する。差と途中計算はT型の範囲内。
+計算量: 初期化O(N)、通常操作は償却O(alpha(N))、メモリO(N)。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: なし
+
 
 namespace cp {
 // value[v]-value[u]=wという差の制約を管理。0始まり。

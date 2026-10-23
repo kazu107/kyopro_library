@@ -1,10 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/graph/kruskal.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include "Graph.hpp"
-#include "../data_structure/UnionFind.hpp"
-#include <algorithm>
-#include <numeric>
+/*
+できること: 無向グラフの最小全域木、非連結なら最小全域森を求める。
+使い方:
+  auto result = cp::kruskal(g);
+  auto total_cost = result.cost; auto chosen_ids = result.edge_ids; bool connected = result.connected;
+前提: 0始まり、無向グラフ専用。負辺可。空グラフは費用0・成分数0・connected=true。合計費用をCost型に収める。
+計算量: O(V+E log(E+1))、メモリO(V+E)。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: graph/Graph.hpp, data_structure/UnionFind.hpp
+
 
 namespace cp {
 template <class Cost>

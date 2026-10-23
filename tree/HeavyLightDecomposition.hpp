@@ -1,9 +1,17 @@
 // https://github.com/kazu107/kyopro_library/blob/main/tree/HeavyLightDecomposition.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include "RootedForest.hpp"
-#include <algorithm>
-#include <utility>
+/*
+できること: 木の経路を順序付きの配列区間に分ける。部分木区間・LCAも取得でき、遅延セグメント木と組み合わせられる。
+使い方:
+  cp::HeavyLightDecomposition<long long> hld(g, root); auto parts = hld.path_segments(u, v);
+  for (auto part : parts) { seg.range_apply(part.l, part.r, delta); } // 和・最小・最大など。
+  auto edges = hld.path_segments(u, v, true); // 辺の値は子のposに置く。LCAを除く。
+前提: 0始まり、無向の森。区間[l,r)、reversed=trueなら逆順に読む。別成分の経路は空。配列位置iの元頂点はvertex_at[i]。
+計算量: 構築O(V+E)、経路分解・LCA O(log V)、通常のセグメント木と組み合わせた経路操作O(log^2 V)。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: tree/RootedForest.hpp
+
 
 namespace cp {
 struct PathSegment { int l, r; bool reversed; };

@@ -1,7 +1,9 @@
 # グラフ
 
 新しいライブラリは **GNU C++17以降**、名前空間は `cp` です。
-必要な標準ヘッダと依存ファイルを各ヘッダから読み込むため、使う機能の `.hpp` を直接includeできます。
+各ファイルにはinclude行を置かず、提出用テンプレートに貼り付けて使います。
+標準ヘッダは利用側で用意し、冒頭の `// 依存:` に示した共有コードを依存順に先に貼り付けてください。
+[一括ツール](../tests/run_tests.py)の `--bundle graph/dijkstra.hpp` などでも、依存を重複させずにまとめられます。
 外部ライブラリは不要です。最短路の内部計算ではGCC/Clangの `__int128` 拡張を使用します。
 
 ## 共通のグラフ
@@ -85,13 +87,10 @@ Dijkstraの負辺、0-1 BFSの0/1以外の重みは `std::invalid_argument` に�
 
 ## 使用例
 
-リポジトリ直下に置くプログラムの例です。
+標準ヘッダと「使用するコード」の依存先を貼り付けた後に書く利用例です。
 
 ```cpp
-#include <iostream>
-#include "graph/dijkstra.hpp"
-#include "graph/lowlink.hpp"
-
+// 使用するコード: graph/dijkstra.hpp, graph/lowlink.hpp
 int main() {
     cp::Graph<> g(4);
     g.add_edge(0, 1, 2);

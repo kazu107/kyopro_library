@@ -1,8 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/graph/scc.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include "dfs.hpp"
-#include <algorithm>
+/*
+できること: 有向グラフの強連結成分と、成分を頂点にまとめた縮約DAGを求める。
+使い方:
+  auto result = cp::strongly_connected_components(g);
+  int id = result.component[v]; auto members = result.groups[id]; auto dag = result.dag;
+前提: 0始まり、有向グラフ専用。成分番号はトポロジカル順。dagの多重辺は除去しない。
+計算量: O(V+E)、メモリO(V+E)。再帰しないKosaraju法。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: graph/dfs.hpp
+
 
 namespace cp {
 struct SccResult {

@@ -1,12 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/flow/BipartiteMatching.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include <algorithm>
-#include <cassert>
-#include <limits>
-#include <queue>
-#include <utility>
-#include <vector>
+/*
+できること: 二部グラフの最大マッチング、対応する頂点の組、最小頂点被覆を取得する。
+使い方:
+  cp::BipartiteMatching matching(left_n, right_n); matching.add_edge(left, right);
+  int count = matching.solve(); auto pairs = matching.pairs(); auto cover = matching.minimum_vertex_cover();
+前提: 左右それぞれ独立した0始まり。pairs/coverはsolve後に取得し、辺追加後は再度solveする。空の左右集合・多重辺可。
+計算量: O((V+E)sqrt(V+1))、メモリO(V+E)。solveは毎回最初から計算。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: なし
+
 
 namespace cp {
 // 左右別々に0始まり。BipartiteMatching m(left_n,right_n); m.add_edge(l,r);

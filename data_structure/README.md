@@ -27,12 +27,10 @@
 
 ### 使用例
 
-次のプログラムをリポジトリ直下に保存すると、そのままコンパイルできます。
+標準ヘッダを用意した提出用テンプレートへ「使用するコード」を貼り付けた後の利用例です。
 
 ```cpp
-#include <iostream>
-#include "data_structure/LagySegTree.cpp"
-
+// 使用するコード: data_structure/LagySegTree.cpp
 int main() {
     std::vector<long long> a = {3, 1, 1, 4};
 
@@ -172,7 +170,7 @@ g++ -std=c++17 -O2 -Wall -Wextra -Werror tests/lazy_segtree_test.cpp -o build/la
 ## Union-Find
 
 新規のUnion-FindはGNU C++17以降、名前空間 `cp` です。
-頂点番号は0始まりで、必要なヘッダを自身でincludeします。
+頂点番号は0始まりです。標準ヘッダは利用側で用意し、必要なコードをテンプレートに貼り付けます。
 
 | ファイル | 主な操作 | 計算量 |
 | --- | --- | --- |
@@ -195,11 +193,7 @@ g++ -std=c++17 -O2 -Wall -Wextra -Werror tests/lazy_segtree_test.cpp -o build/la
 rollbackは戻す呼び出し数に比例し、メモリはO(V+保持する呼び出し数)です。
 
 ```cpp
-#include <iostream>
-#include "data_structure/UnionFind.hpp"
-#include "data_structure/WeightedUnionFind.hpp"
-#include "data_structure/RollbackUnionFind.hpp"
-
+// 使用するコード: data_structure/UnionFind.hpp, data_structure/WeightedUnionFind.hpp, data_structure/RollbackUnionFind.hpp
 int main() {
     cp::UnionFind uf(3);
     uf.merge(0, 1);

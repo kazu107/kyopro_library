@@ -1,7 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/graph/TwoSat.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include "scc.hpp"
+/*
+できること: 二択の変数に対するOR節を追加し、すべてを満たす真偽値の割り当てを求める。
+使い方:
+  cp::TwoSat sat(n); sat.add_clause(i, true, j, false); // x[i] または !x[j]。
+  sat.force(i, true); if (sat.satisfiable()) { auto answer = sat.answer(); }
+前提: 変数は0始まり。add_implication(i,f,j,g)は(x[i]==f)なら(x[j]==g)。answerは直近のsatisfiableがtrueのときのみ。
+計算量: 充足判定O(変数数+節数)、メモリも同じ。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: graph/scc.hpp
+
 
 namespace cp {
 // TwoSat sat(n); sat.add_clause(i,f,j,g); bool ok=sat.satisfiable();

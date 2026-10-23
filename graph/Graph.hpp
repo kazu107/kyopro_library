@@ -1,10 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/graph/Graph.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include <cassert>
-#include <limits>
-#include <type_traits>
-#include <vector>
+/*
+できること: 有向・無向、重み、多重辺、自己ループ、辺IDを持つ共通のグラフを保存する。
+使い方:
+  cp::Graph<long long> g(n, false); int id = g.add_edge(u, v, cost); // trueなら有向。cost省略時は1。
+  g[v]の隣接辺を走査し、各edgeのto/cost/idで行き先・重み・辺IDを取得する。
+前提: 頂点は0始まり。edges()は元の辺一覧で、無向辺も1本のみ。隣接リストには両方向を同じIDで保存する。
+計算量: 構築O(V)、辺追加は償却O(1)、メモリO(V+E)。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: なし
+
 
 namespace cp {
 // 0始まり。無向辺もedges()では1本、隣接リストでは両方向に保持する。

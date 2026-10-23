@@ -1,12 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/tests/union_find_test.cpp
 // SPDX-License-Identifier: CC0-1.0
+/*
+できること: 通常・重み付き・RollbackのUnion-FindをBFSの連結性・既知の差・履歴の削除と照合する。
+使い方:
+  python tests/run_tests.py // このテストを含む全テストを実行。--debugで境界チェックを有効化。
+前提: このファイル単体にはヘッダを含めない。依存コードと標準ヘッダはテストランナーが補い、assertを有効にする。
+計算量: ケース数と全列挙の規模に依存。固定seedの比較テストと境界条件を実行。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: data_structure/UnionFind.hpp, data_structure/WeightedUnionFind.hpp, data_structure/RollbackUnionFind.hpp
+
 // BFSによる連結性と、既知のポテンシャル差を正解として比較する。
-#include "../data_structure/UnionFind.hpp"
-#include "../data_structure/WeightedUnionFind.hpp"
-#include "../data_structure/RollbackUnionFind.hpp"
-#include <iostream>
-#include <random>
-#include <set>
 
 #ifdef NDEBUG
 #error "Assertions must be enabled."

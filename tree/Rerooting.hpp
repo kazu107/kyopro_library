@@ -1,8 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/tree/Rerooting.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include "RootedForest.hpp"
-#include <algorithm>
+/*
+できること: Policyで演算を指定し、全頂点を根にした木DPをまとめて求める。省略時は各頂点からの最大距離。
+使い方:
+  cp::Rerooting<> dp(g); auto answer = dp.build(root);
+  cp::Rerooting<MyPolicy> custom(n); custom.add_edge(u, v, cost); auto values = custom.build();
+前提: 無向の木・森。PolicyはDP/identity/merge/lift/add_vertexを定義する。mergeは結合則と単位元を持ち、隣接リスト順で結合する。
+計算量: 各演算・DPコピーがO(1)なら全頂点分O(V+E)、メモリO(V+E)。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: tree/RootedForest.hpp
+
 
 namespace cp {
 struct MaxDistanceRerooting {

@@ -1,8 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/tree/RootedForest.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include "../graph/Graph.hpp"
-#include <stdexcept>
+/*
+できること: 木・森を根付けて、親・親辺・深さ・成分・探索順・部分木サイズを求める。
+使い方:
+  cp::RootedForest<long long> forest(g, root);
+  int parent = forest.parent[v]; int size = forest.subtree_size[v]; auto roots = forest.roots;
+前提: 0始まり、無向の森。閉路・平行辺・自己ループ・有向グラフはinvalid_argument。指定rootの成分を先に処理し、残りは頂点番号順。
+計算量: O(V+E)、メモリO(V+E)。空の森可、再帰しない。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: graph/Graph.hpp
+
 
 namespace cp {
 // 木/森の共通前処理。rootの成分を最初に、残りは頂点番号順に根付ける。

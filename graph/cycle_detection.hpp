@@ -1,8 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/graph/cycle_detection.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include "Graph.hpp"
-#include <algorithm>
+/*
+できること: 有向・無向グラフから1個の閉路を探し、頂点列と辺ID列を返す。
+使い方:
+  auto cycle = cp::find_cycle(g);
+  bool exists = !cycle.vertices.empty(); auto ids = cycle.edge_ids; // verticesの末尾は始点と同じ。
+前提: 0始まり。閉路なしなら両方空。自己ループ、多重辺による無向の2辺の閉路にも対応。
+計算量: O(V+E)、追加メモリO(V)。明示スタックで探索する。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: graph/Graph.hpp
+
 
 namespace cp {
 // verticesは始点を末尾でも繰り返す。edge_ids.size()+1==vertices.size()。

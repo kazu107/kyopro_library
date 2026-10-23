@@ -1,8 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/tree/EulerTour.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include "RootedForest.hpp"
-#include <utility>
+/*
+できること: 部分木を配列上の連続区間へ変換し、祖先判定や位置からの頂点復元を行う。
+使い方:
+  cp::EulerTour<long long> tour(g, root); auto [l, r] = tour.subtree_range(v);
+  bool ancestor = tour.is_ancestor(u, v); int node = tour.vertex_at[position];
+前提: 0始まり、無向の木・森。部分木は[tin[v],tout[v])。各頂点を1回だけ配列に並べる。別成分の祖先判定はfalse。
+計算量: 構築O(V+E)、取得・祖先判定O(1)、メモリO(V+E)。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: tree/RootedForest.hpp
+
 
 namespace cp {
 // 部分木を配列上の半開区間[tin[v],tout[v])へ変換する(各頂点1回)。

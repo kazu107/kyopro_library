@@ -64,14 +64,10 @@
 元の頂点番号へは `hld.vertex_at[index]` で戻せます。
 同値のときに選ばれるのは配列位置が最小の頂点で、元の頂点番号が最小とは限りません。
 
-次のプログラムはリポジトリ直下からコンパイルできます。
+標準ヘッダと「使用するコード」の依存先をテンプレートに貼り付けた後の利用例です。
 
 ```cpp
-#include <iostream>
-#include "tree/Lca.hpp"
-#include "tree/HeavyLightDecomposition.hpp"
-#include "data_structure/LagySegTree.cpp"
-
+// 使用するコード: tree/Lca.hpp, tree/HeavyLightDecomposition.hpp, data_structure/LagySegTree.cpp
 int main() {
     cp::Graph<> g(5);
     g.add_edge(0, 1);
@@ -118,9 +114,7 @@ Policyには次を用意します。
 次は各頂点から全頂点への距離の和を取得する例です。
 
 ```cpp
-#include <iostream>
-#include "tree/Rerooting.hpp"
-
+// 使用するコード: tree/Rerooting.hpp
 struct SumDistances {
     struct DP { long long sum; int count; };
     static DP identity() { return {0, 0}; }

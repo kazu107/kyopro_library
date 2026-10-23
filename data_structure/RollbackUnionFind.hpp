@@ -1,10 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/data_structure/RollbackUnionFind.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include <algorithm>
-#include <cassert>
-#include <cstddef>
-#include <vector>
+/*
+できること: 集合の結合を履歴に記録し、1回分または保存した状態まで巻き戻す。
+使い方:
+  cp::RollbackUnionFind uf(n); auto token = uf.snapshot(); uf.merge(u, v);
+  uf.rollback(token); // 保存した状態へ戻す。uf.undo()はmerge呼び出し1回分を取り消す。
+前提: 頂点は0始まり。結合しなかったmergeも履歴1回に数える。undoには履歴が必要。tokenは現在の履歴の祖先のみ。
+計算量: 結合・検索O(log N)、undo O(1)、rollbackは戻す回数に比例。メモリO(N+履歴数)。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: なし
+
 
 namespace cp {
 // 結合を巻き戻せるUnion-Find。0始まり。経路圧縮を行わない。

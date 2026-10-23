@@ -1,15 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/flow/MinCostFlow.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include <algorithm>
-#include <cassert>
-#include <functional>
-#include <limits>
-#include <queue>
-#include <stdexcept>
-#include <type_traits>
-#include <utility>
-#include <vector>
+/*
+できること: 費用付き容量ネットワークで、送れる最大流量とその最小費用を求める。流量の上限指定もできる。
+使い方:
+  cp::MinCostFlow<long long, long long> network(n); network.add_edge(u, v, capacity, cost);
+  auto [sent, total_cost] = network.flow(source, sink, limit); // limit省略時は送れるだけ送る。
+前提: 0始まり、source!=sink、容量は非負整数。負費用可だが到達可能な負閉路はdomain_error。逆費用・経路費用・総費用をCostに収める。
+計算量: O(VE+A(V+E)log(V+E))、Aは増加路数。メモリO(V+E)。内部の__int128はGNU/Clang拡張。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: なし
+
 
 namespace cp {
 // MinCostFlow<> f(n); f.add_edge(u,v,capacity,cost); auto [sent,cost]=f.flow(s,t,limit);

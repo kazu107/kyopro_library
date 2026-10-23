@@ -1,8 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/graph/ShortestPath.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include "Graph.hpp"
-#include <algorithm>
+/*
+できること: 最短路の距離・親・親辺・負閉路の影響を保持し、頂点列と辺ID列を復元する。
+使い方:
+  auto result = cp::bfs(g, source); // またはdijkstra/bellman_ford等の結果を使う。
+  if (result.finite(target)) { auto vertices = result.path_to(target); auto ids = result.edge_path_to(target); }
+前提: 最短路関数が返す共通結果。reachableは負閉路の影響を受ける頂点もtrue、finiteは有限距離のみtrue。未到達はINF、影響ありは-INF。
+計算量: 結果の領域O(V)、経路復元O(経路長)。利用する最短路関数のコードも別途必要。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: graph/Graph.hpp
+
 
 namespace cp {
 // dist == INFは未到達。negative[v]は到達可能な負閉路からvへ到達可能。

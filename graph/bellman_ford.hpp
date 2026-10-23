@@ -1,8 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/graph/bellman_ford.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include "ShortestPath.hpp"
-#include <queue>
+/*
+できること: 負辺を含むグラフの最短路と、始点から到達可能な負閉路の影響を求める。
+使い方:
+  auto result = cp::bellman_ford(g, source);
+  bool unbounded = result.negative[target]; auto path = result.path_to(target); // 影響ありなら経路は空。
+前提: 0始まり、64bit以下の符号付き整数重み。未到達はINF、負閉路を経由できる頂点はnegative=trueで距離-INF。有限距離は(-INF,INF)内。
+計算量: O(VE+V+E)、メモリO(V)。内部の__int128はGNU/Clang拡張。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: graph/ShortestPath.hpp
+
 
 namespace cp {
 // 負辺可。bellman_ford(g,s)。O(VE+V+E)、メモリO(V)。

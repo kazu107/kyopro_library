@@ -1,8 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/graph/topological_sort.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include "Graph.hpp"
-#include <queue>
+/*
+できること: DAGの依存関係に沿った頂点順序を求め、閉路の有無も判定する。
+使い方:
+  auto result = cp::topological_sort(g);
+  if (result.is_dag) { auto order = result.order; }
+前提: 0始まり、有向グラフ専用。閉路ありならis_dag=falseでorderは部分的な順序。辞書順最小の保証はない。
+計算量: O(V+E)、追加メモリO(V)。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: graph/Graph.hpp
+
 
 namespace cp {
 struct TopologicalSortResult { bool is_dag; std::vector<int> order; };

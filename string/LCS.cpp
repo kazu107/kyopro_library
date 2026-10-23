@@ -1,5 +1,15 @@
 // https://github.com/kazu107/kyopro_library/blob/main/string/LCS.cpp
 // SPDX-License-Identifier: CC0-1.0
+/*
+できること: 2つの文字列の最長共通部分列を1つ復元する。連続する部分文字列とは異なる。
+使い方:
+  string answer = lcs("abcde", "ace"); // "ace"。
+前提: stdの名前解決を利用側で用意する。最長の答えが複数ならそのうち1つ。空文字列にも対応。
+計算量: 長さN,Mに対して時間・メモリO((N+1)(M+1))。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: なし
+
 //最長共通部分列
 string lcs (string s, string t) {
     int s_len = (int)s.size(), t_len = (int)t.size();

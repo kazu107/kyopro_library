@@ -1,8 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/graph/bipartite.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include "Graph.hpp"
-#include <queue>
+/*
+できること: 無向グラフを隣接頂点が異なる2色で塗れるか判定し、0/1の色分けを返す。
+使い方:
+  auto result = cp::bipartite_check(g);
+  if (result.is_bipartite) { int color = result.color[v]; }
+前提: 0始まり、無向グラフ専用。全成分を判定する。自己ループは二部でない。falseならcolorは途中までの値。
+計算量: O(V+E)、追加メモリO(V)。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: graph/Graph.hpp
+
 
 namespace cp {
 struct BipartiteResult { bool is_bipartite; std::vector<int> color; };

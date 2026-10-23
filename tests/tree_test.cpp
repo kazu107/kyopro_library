@@ -1,19 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/tests/tree_test.cpp
 // SPDX-License-Identifier: CC0-1.0
+/*
+できること: LCA・部分木・HLD・直径・全方位木DPを素朴な経路・DPと照合し、遅延木との組み合わせも確認する。
+使い方:
+  python tests/run_tests.py // このテストを含む全テストを実行。--debugで境界チェックを有効化。
+前提: このファイル単体にはヘッダを含めない。依存コードと標準ヘッダはテストランナーが補い、assertを有効にする。
+計算量: ケース数と全列挙の規模に依存。固定seedの比較テストと境界条件を実行。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: tree/Lca.hpp, tree/EulerTour.hpp, tree/HeavyLightDecomposition.hpp, tree/diameter.hpp, tree/Rerooting.hpp, tree/rerooting.cpp, tree/Subtreesize.cpp, data_structure/LagySegTree.cpp
+
 // BFSで求めた親・実経路と、全頂点を根にした素朴DPを正解にする。
-#include "../tree/Lca.hpp"
-#include "../tree/EulerTour.hpp"
-#include "../tree/HeavyLightDecomposition.hpp"
-#include "../tree/diameter.hpp"
-#include "../tree/Rerooting.hpp"
-#include "../tree/rerooting.cpp"
-#include "../tree/Subtreesize.cpp"
-#include "../data_structure/LagySegTree.cpp"
-#include <functional>
-#include <iostream>
-#include <queue>
-#include <random>
-#include <string>
 
 #ifdef NDEBUG
 #error "Assertions must be enabled."

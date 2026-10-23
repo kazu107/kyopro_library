@@ -1,8 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/graph/connected_components.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include "Graph.hpp"
-#include <queue>
+/*
+できること: 無向グラフを連結成分に分け、各頂点の成分番号と成分ごとの頂点一覧を返す。
+使い方:
+  auto result = cp::connected_components(g);
+  int id = result.component[v]; auto vertices = result.groups[id];
+前提: 0始まり、無向グラフ専用。孤立頂点も1成分。重みは使わない。空グラフ・多重辺・自己ループ可。
+計算量: O(V+E)、追加メモリO(V)。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: graph/Graph.hpp
+
 
 namespace cp {
 struct ConnectedComponentsResult {

@@ -1,13 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/flow/Dinic.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include <algorithm>
-#include <cassert>
-#include <limits>
-#include <queue>
-#include <type_traits>
-#include <utility>
-#include <vector>
+/*
+できること: 有向容量ネットワークの最大流、最小カット、各辺の容量と流量を取得する。
+使い方:
+  cp::Dinic<long long> network(n); int id = network.add_edge(u, v, capacity);
+  auto sent = network.flow(source, sink); auto cut = network.min_cut(source); auto edge = network.get_edge(id);
+前提: 0始まり、source!=sink、容量は非負整数。戻り値は追加で流した量。最小カットは上限なしで最大まで流した後に取得する。
+計算量: 一般容量でO(V^2 E)、メモリO(V+E)。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: なし
+
 
 namespace cp {
 // Dinic<> flow(n); id=flow.add_edge(u,v,capacity); flow.flow(s,t,limit);

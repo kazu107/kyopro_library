@@ -1,24 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/tests/graph_test.cpp
 // SPDX-License-Identifier: CC0-1.0
+/*
+できること: 最短路・連結性・閉路・SCC・Lowlink・最小全域森・2-SATを独立した正解と照合する。
+使い方:
+  python tests/run_tests.py // このテストを含む全テストを実行。--debugで境界チェックを有効化。
+前提: このファイル単体にはヘッダを含めない。依存コードと標準ヘッダはテストランナーが補い、assertを有効にする。
+計算量: ケース数と全列挙の規模に依存。固定seedの比較テストと境界条件を実行。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: graph/bfs.hpp, graph/dfs.hpp, graph/zero_one_bfs.hpp, graph/dijkstra.hpp, graph/bellman_ford.hpp, graph/floyd_warshall.hpp, graph/connected_components.hpp, graph/bipartite.hpp, graph/topological_sort.hpp, graph/cycle_detection.hpp, graph/scc.hpp, graph/lowlink.hpp, graph/kruskal.hpp, graph/TwoSat.hpp
+
 // 全探索・独立した辺数制限DP・頂点/辺の削除との比較。seed固定。
-#include "../graph/bfs.hpp"
-#include "../graph/dfs.hpp"
-#include "../graph/zero_one_bfs.hpp"
-#include "../graph/dijkstra.hpp"
-#include "../graph/bellman_ford.hpp"
-#include "../graph/floyd_warshall.hpp"
-#include "../graph/connected_components.hpp"
-#include "../graph/bipartite.hpp"
-#include "../graph/topological_sort.hpp"
-#include "../graph/cycle_detection.hpp"
-#include "../graph/scc.hpp"
-#include "../graph/lowlink.hpp"
-#include "../graph/kruskal.hpp"
-#include "../graph/TwoSat.hpp"
-#include <iostream>
-#include <random>
-#include <set>
-#include <tuple>
 
 #ifdef NDEBUG
 #error "Assertions must be enabled."

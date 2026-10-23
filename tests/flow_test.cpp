@@ -1,12 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/tests/flow_test.cpp
 // SPDX-License-Identifier: CC0-1.0
+/*
+できること: 最大流・最小費用流・二部マッチングを、全カット・流量全列挙・部分集合DPと照合する。
+使い方:
+  python tests/run_tests.py // このテストを含む全テストを実行。--debugで境界チェックを有効化。
+前提: このファイル単体にはヘッダを含めない。依存コードと標準ヘッダはテストランナーが補い、assertを有効にする。
+計算量: ケース数と全列挙の規模に依存。固定seedの比較テストと境界条件を実行。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: flow/Dinic.hpp, flow/MinCostFlow.hpp, flow/BipartiteMatching.hpp
+
 // 最大流は全カット、最小費用流は各辺の流量を全列挙、マッチングは部分集合DPと照合。
-#include "../flow/Dinic.hpp"
-#include "../flow/MinCostFlow.hpp"
-#include "../flow/BipartiteMatching.hpp"
-#include <functional>
-#include <iostream>
-#include <random>
 
 #ifdef NDEBUG
 #error "Assertions must be enabled."

@@ -1,5 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/data_structure/SegTree.cpp
 // SPDX-License-Identifier: CC0-1.0
+/*
+できること: 一点代入と、区間の最大値の取得を行う固定長配列のセグメント木。
+使い方:
+  SegTree seg; seg.init(n); seg.update(pos, value);
+  int maximum = seg.query(l, r, 1, seg.trsize + 1, 1);
+前提: 1始まり、区間[l,r)。1<=n<=131072、値は-2000000000以上のint。新しいオブジェクトをinitして使う。stdの名前解決を用意する。
+計算量: 初期化O(N)、一点代入・区間取得O(log N)。固定配列300000個のintを保持。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: なし
+
 //セグメントツリーの構造体
 struct SegTree {
     int tr[300000], trsize = 1;// trはtreeの配列、trsizeはtreeのサイズ

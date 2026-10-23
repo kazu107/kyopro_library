@@ -2,7 +2,7 @@
 
 新規コードはGNU C++17以降、名前空間 `cp`、頂点番号は0始まりです。
 通常のGraphとは異なる残余辺や左右の頂点集合を持つため、専用の構造体を使います。
-必要なヘッダは各ファイルがincludeします。
+標準ヘッダは利用側で用意し、各ファイルのコードを提出用テンプレートに貼り付けて使います。
 
 | ファイル | 機能 | 計算量 |
 | --- | --- | --- |
@@ -66,14 +66,10 @@ pairsとminimum_vertex_coverはsolve後に使ってください。
 
 ## 使用例
 
-リポジトリ直下からコンパイルできる例です。
+標準ヘッダと「使用するコード」を提出用テンプレートへ貼り付けた後の利用例です。
 
 ```cpp
-#include <iostream>
-#include "flow/Dinic.hpp"
-#include "flow/MinCostFlow.hpp"
-#include "flow/BipartiteMatching.hpp"
-
+// 使用するコード: flow/Dinic.hpp, flow/MinCostFlow.hpp, flow/BipartiteMatching.hpp
 int main() {
     cp::Dinic<> maximum(3);
     maximum.add_edge(0, 1, 3);

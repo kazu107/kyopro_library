@@ -1,8 +1,15 @@
 // https://github.com/kazu107/kyopro_library/blob/main/tree/Subtreesize.cpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include <cassert>
-#include <vector>
+/*
+できること: 未訪問の隣接頂点をたどって到達した頂点数を数える。木では根の次数1にも対応する部分木サイズになる。
+使い方:
+  vector<bool> visited(adjacency.size(), false); int count = tr(root, adjacency, visited);
+前提: 0始まり、visitedと隣接リストの長さを一致させる。根はvisitedの初期値によらず含め、他は未訪問の頂点のみ。visitedを書き換える。
+計算量: O(V+E)、メモリO(V)。明示スタックを使用。stdの名前解決を利用側で用意する。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: なし
+
 
 // tr(root, adjacency, visited): 未訪問の隣接頂点を探索して到達した頂点数を返す。
 // 根はvisitedの初期値によらず含める。探索した頂点をvisited=trueにする。

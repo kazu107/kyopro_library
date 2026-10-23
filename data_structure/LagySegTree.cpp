@@ -1,6 +1,18 @@
 // https://github.com/kazu107/kyopro_library/blob/main/data_structure/LagySegTree.cpp
 // SPDX-License-Identifier: CC0-1.0
 /*
+できること: 区間加算と、和・最小・最大・個数・位置など8種類の区間取得。Policyで独自の演算にも切り替えられる。
+使い方:
+  LazySegTree<RangeAddSum> seg(vector<long long>{3, 1, 4}); seg.range_apply(0, 2, 5);
+  auto answer = seg.prod(0, 3); // 18。RangeAddMin/Max/MinCount/MaxCount/MinIndex/MaxIndex/Statsも選べる。
+  seg.set_point(i, value); seg.get(i); seg.all_prod(); // 独自Policyの定義は下の説明を参照。
+前提: 0始まり、区間[l,r)。長さ・各数値の途中計算は型の範囲内。空区間の位置は-1、同値の位置は左端。
+計算量: 構築O(N)、区間更新・取得・一点操作O(log N)、全体取得O(1)、メモリO(N)。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: なし
+
+/*
 区間更新と区間取得のルールを型で切り替える遅延セグメント木 (C++17)。
 ファイル名は既存の LagySegTree.cpp を維持している。
 
@@ -56,10 +68,6 @@
   Fの比較演算子は不要。空の補完ノードにはapplyを呼ばない。
 */
 
-#include <algorithm>
-#include <cassert>
-#include <limits>
-#include <vector>
 
 // 以下の8種類はすべて「区間加算」を使う。
 struct RangeAddBase {

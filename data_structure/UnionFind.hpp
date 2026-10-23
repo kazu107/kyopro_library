@@ -1,10 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/data_structure/UnionFind.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include <cassert>
-#include <numeric>
-#include <utility>
-#include <vector>
+/*
+できること: 集合の結合、連結判定、成分のサイズ・個数・頂点一覧を管理する。
+使い方:
+  cp::UnionFind uf(n); bool joined = uf.merge(u, v);
+  bool connected = uf.same(u, v); int count = uf.size(u); auto groups = uf.groups();
+前提: 頂点は0始まり。mergeは実際に結合したらtrue。辺の削除は対象外。
+計算量: 初期化O(N)、通常操作は償却O(alpha(N))、groupsはO(N alpha(N))、メモリO(N)。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: なし
+
 
 namespace cp {
 // UnionFind uf(n); uf.merge(u,v); uf.same(u,v); uf.size(v);

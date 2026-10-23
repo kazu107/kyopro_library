@@ -1,8 +1,16 @@
 // https://github.com/kazu107/kyopro_library/blob/main/tree/diameter.hpp
 // SPDX-License-Identifier: CC0-1.0
-#pragma once
-#include "RootedForest.hpp"
-#include <algorithm>
+/*
+できること: 非負重みの木の直径の長さ、端点、頂点列・辺ID列を求める。
+使い方:
+  auto result = cp::tree_diameter(g);
+  auto length = result.length; auto path = result.vertices; int from = result.from, to = result.to;
+前提: 0始まり、非負重みの連結な無向木。条件違反はinvalid_argument。空なら端点-1、1頂点なら長さ0。
+計算量: O(V+E)、メモリO(V)。重みの途中の和はCost型の範囲内。
+標準ヘッダは提出用テンプレート側で用意する。
+*/
+// 依存: tree/RootedForest.hpp
+
 
 namespace cp {
 template <class Cost>
