@@ -13,6 +13,8 @@
 | [HeavyLightDecomposition.hpp](HeavyLightDecomposition.hpp) | HLD、順序付きの経路分解、部分木区間、LCA | 構築O(V)、経路分解/LCA O(log V) |
 | [diameter.hpp](diameter.hpp) | 非負重みの木の直径・端点・経路・辺ID | O(V) |
 | [Rerooting.hpp](Rerooting.hpp) | Policyで演算を指定する全方位木DP | 演算O(1)なら全頂点分O(V+E) |
+| [MoOnTree.hpp](MoOnTree.hpp) | 静的なパスの頂点集合を追加・削除するコールバック処理 | 自動幅で追加削除O(N sqrt(Q)+N+Q)回 |
+| [TreePathFrequencyQueries.hpp](TreePathFrequencyQueries.hpp) | パス上で頻度が範囲内の値の種類数 | solveはO(N sqrt(Q)+N+Q log(Q+1)) |
 | [rerooting.cpp](rerooting.cpp) | 既存のグローバル名 `Rerooting` の互換入口。最大距離用 | O(V+E) |
 | [Subtreesize.cpp](Subtreesize.cpp) | 既存の `tr(root, adjacency, visited)`。根の次数1も正しく計算 | O(V+E) |
 
@@ -139,9 +141,95 @@ int main() {
 部分木サイズのtrは渡されたvisitedを更新します。根はvisitedの初期値によらず含み、
 それ以外は未訪問の隣接頂点だけ探索します。
 
+## 木上Moとパスの値頻度
+
+[MoOnTree.hpp](MoOnTree.hpp) は、頂点パスに含まれる頂点の集合をオフラインで処理します。
+辺の向き・重み付き距離ではなく、無向の木・森の経路だけを使います。内部のLCAは単位重みのコピーで作るため、
+入力の重みが大きくても距離加算によるオーバーフローは起きません。
+
+`MoOnTree mo(g, root = 0)` を作り、`add_query(u,v)` で登録して返されたIDを保存します。
+`run(add, remove, record, block_size = 0)` は、`add(v)` / `remove(v)` で現在の集合を変え、
+`record(query_id)` で答えを記録します。呼び出し順は登録順と異なるので、必ずIDに対応させて保存してください。
+
+- パスは両端の頂点を含み、同じ頂点のクエリも使えます。別成分間は `std::invalid_argument` です。
+- `tour()` は各頂点が2回出る入出イベント列です。通常のEulerTourの各頂点1回の配列とは異なります。
+- コールバックの状態は空集合から始めます。通常終了時には全頂点が削除され、再度runできます。
+- コールバックは例外を投げず、頂点集合の追加・削除として処理してください。経路の順序に依存する集約や、途中の値更新は対象外です。
+- ブロック幅は0なら自動、正の値なら手動指定、負なら例外です。
+
+構築O(N log(N+1))、クエリ追加O(log(N+1))です。
+Q件のrunはソートO(Q log(Q+1))に加えて、ブロック幅Bに対してO(N^2/B+QB+N)回程度の集合操作を行います。
+自動幅ではLCA補完も含めた追加削除回数がO(N sqrt(Q)+N+Q)で、メモリはO(N log(N+1)+Q)です。
+追加・削除・記録が重い場合は、その処理時間も掛かります。
+
+以下は、パス上にある値の種類数を求める利用例です。
+
+```cpp
+// 使用するコード: tree/MoOnTree.hpp
+int main() {
+    cp::Graph<> g(5);
+    g.add_edge(0, 1);
+    g.add_edge(1, 2);
+    g.add_edge(1, 3);
+    g.add_edge(3, 4);
+    std::vector<int> value = {1, 2, 1, 3, 2};
+
+    cp::MoOnTree mo(g);
+    mo.add_query(2, 4);
+    mo.add_query(0, 2);
+    mo.add_query(3, 3);
+    std::vector<int> counts(4), answer(mo.query_count());
+    int distinct = 0;
+    mo.run(
+        [&](int v) { if (counts[value[v]]++ == 0) ++distinct; },
+        [&](int v) { if (--counts[value[v]] == 0) --distinct; },
+        [&](int id) { answer[id] = distinct; }
+    );
+    for (int i = 0; i < static_cast<int>(answer.size()); ++i)
+        std::cout << (i ? " " : "") << answer[i];
+    std::cout << '\n'; // 3 2 1
+    std::cout << distinct << '\n'; // 0: 最後は空集合に戻る
+}
+```
+
+[TreePathFrequencyQueries.hpp](TreePathFrequencyQueries.hpp) は、このMo処理と値の座標圧縮をまとめた構造体です。
+`TreePathFrequencyQueries<Label> queries(g, values, root = 0)` を作り、
+`add_query(u,v,low,high)` で「パス上で出現回数が閉区間[low,high]に入る値の種類数」を登録し、
+`solve()` で登録順の答えを返します。
+
+lowは1以上、highはlow以上です。出現0回の値は対象に含めません。
+値は比較可能な型で、負数・大きな値にも対応します。valuesの長さは頂点数に一致させてください。
+空の森で0クエリなら空の答えです。solveは繰り返し使え、登録後にクエリを追加することもできます。
+辺・値を作成後に更新する機能はありません。
+
+頻度以上の値の種類数を保持するため、頂点の追加・削除と各回答の計算はO(1)です。
+構築O(N log(N+1))、クエリ追加O(log(N+1))、
+solveはO(N sqrt(Q)+N+Q log(Q+1))、メモリO(N log(N+1)+Q)です。
+
+```cpp
+// 使用するコード: tree/TreePathFrequencyQueries.hpp
+int main() {
+    cp::Graph<> g(5);
+    for (int v = 1; v < 5; ++v) g.add_edge(v - 1, v);
+    cp::TreePathFrequencyQueries<int> queries(g, {1, 2, 3, 1, 2});
+    queries.add_query(0, 4, 1, 2);
+    queries.add_query(0, 3, 2, 3);
+    queries.add_query(2, 4, 1, 1);
+    queries.add_query(1, 3, 2, 5);
+    auto answers = queries.solve();
+    for (int i = 0; i < static_cast<int>(answers.size()); ++i)
+        std::cout << (i ? " " : "") << answers[i];
+    std::cout << '\n'; // 3 1 3 0
+}
+```
+
 ## 検証
 
 [tree_test.cpp](../tests/tree_test.cpp) は180個の木・森を使い、BFSで求めた親・経路・距離と、
 全頂点を根にした素朴なDPと照合します。負辺、空の森、別成分、順序を持つ全方位木DPも含みます。
 HLDの区間順序と辺用区間を確認し、既存の遅延セグメント木との組み合わせをランダム操作で検証します。
 10万頂点の鎖でLCA・HLD・直径・全方位木DP・既存trの非再帰動作も確認します。
+
+[recent_graph_test.cpp](../tests/recent_graph_test.cpp) は、木上Moの23,490経路をBFSのパス集合、
+頻度取得の22,989クエリを値ごとの直接集計と照合します。run後の空状態と再実行、森・別成分・自己パス、
+大きな辺重みと20万頂点の鎖も確認し、ABC477 Gの公式サンプル2例を入出力で比較します。

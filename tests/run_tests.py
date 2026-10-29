@@ -23,8 +23,8 @@ EXPECTED_EXAMPLES = {
     "data_structure/README.md": [
         "4\n1 2\n24 4 8 4\n1 1\n3 0\n3\n", "2\n3\n0\n",
     ],
-    "graph/README.md": ["6\n0 1 2 3\n3\n"],
-    "tree/README.md": ["14\n54\n1 3\n", "3 2 3\n"],
+    "graph/README.md": ["6\n0 1 2 3\n3\n", "2 12\n0 2 3\n9\n", "2 8\n5\n", "0 2 3 1 4\n8\n"],
+    "tree/README.md": ["14\n54\n1 3\n", "3 2 3\n", "3 2 1\n0\n", "3 1 3 0\n"],
     "flow/README.md": ["3\n3 7\n2\n2\n"],
 }
 

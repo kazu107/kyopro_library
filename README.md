@@ -1,7 +1,8 @@
 # 競技プログラミング用 C++ ライブラリ
 
 競技プログラミングで使う関数・データ構造を、カテゴリ別にまとめたライブラリです。
-現在46個のライブラリファイルがあります。グラフ・木・フロー・Union-Find関連の28ヘッダと、比較テストを追加しています。
+現在51個のライブラリファイルがあります。グラフ・木・フロー・Union-Find関連の33ヘッダと、比較テストを追加しています。
+最近のAtCoderを基に、ラベル付き最短路、車輪グラフの距離、最小番号優先探索、木上Mo・経路の値頻度を追加しました。[対象問題と一般化の記録](docs/atcoder_graph_research_20261029.md)も参照できます。
 
 ## カテゴリ
 
@@ -16,9 +17,9 @@
 | [prefix_sum](prefix_sum/) | 一次元・二次元の累積和 | 2 |
 | [two_pointers](two_pointers/) | しゃくとり法、連続部分配列 | 1 |
 | [string](string/) | 文字列アルゴリズム | 1 |
-| [tree](tree/) | LCA、Euler Tour、HLD、直径、汎用全方位木DP | 8 |
+| [tree](tree/) | LCA、Euler Tour、HLD、直径、汎用全方位木DP、木上Mo・経路頻度 | 10 |
 | [grid](grid/) | グリッド、二次元配列の操作 | 1 |
-| [graph](graph/) | 探索、最短路、連結性、最小全域森、2-SAT | 16 |
+| [graph](graph/) | 探索、ラベル付き最短路、車輪距離、連結性、最小全域森、2-SAT | 19 |
 | [dynamic_programming](dynamic_programming/) | 動的計画法（追加用） | 0 |
 | [geometry](geometry/) | 計算幾何（追加用） | 0 |
 | [flow](flow/) | 最大流、最小費用流、二部マッチング・最小頂点被覆 | 3 |
@@ -67,6 +68,8 @@
 | [HeavyLightDecomposition.hpp](tree/HeavyLightDecomposition.hpp) | 順序付きの経路分解と部分木区間 |
 | [diameter.hpp](tree/diameter.hpp) | 非負重みの木の直径と経路 |
 | [Rerooting.hpp](tree/Rerooting.hpp) | Policyを指定する汎用全方位木DP |
+| [MoOnTree.hpp](tree/MoOnTree.hpp) | 木・森の静的な頂点パスを追加/削除コールバックで処理する木上Mo |
+| [TreePathFrequencyQueries.hpp](tree/TreePathFrequencyQueries.hpp) | 頂点パス上で出現回数が閉区間に入る値の種類数 |
 | [rotate90.cpp](grid/rotate90.cpp) | 文字列・整数の二次元配列を90度回転 |
 
 
@@ -77,9 +80,12 @@
 | [Graph.hpp](graph/Graph.hpp) | 有向/無向、重み、辺IDを持つ共通グラフ |
 | [ShortestPath.hpp](graph/ShortestPath.hpp) | 最短路の距離・親・頂点列/辺列の復元 |
 | [bfs.hpp](graph/bfs.hpp) | BFS、複数始点BFS |
+| [lexicographic_bfs.hpp](graph/lexicographic_bfs.hpp) | 最短辺数の中で辺ラベル列が辞書順最小になる経路・連結値の剰余 |
 | [dfs.hpp](graph/dfs.hpp) | 非再帰DFSの森、親・深さ・訪問/退出順 |
+| [min_first_search.hpp](graph/min_first_search.hpp) | 最小優先度の候補から選ぶ探索・指定探索順になる木の数え上げ |
 | [zero_one_bfs.hpp](graph/zero_one_bfs.hpp) | 0-1 BFS |
 | [dijkstra.hpp](graph/dijkstra.hpp) | 非負重みの最短路 |
+| [WheelGraphDistance.hpp](graph/WheelGraphDistance.hpp) | 輪と中心を持つ重み付き車輪グラフのO(1)距離取得 |
 | [bellman_ford.hpp](graph/bellman_ford.hpp) | 負辺のある最短路、負閉路の影響判定 |
 | [floyd_warshall.hpp](graph/floyd_warshall.hpp) | 全頂点間の最短路と経路復元 |
 | [connected_components.hpp](graph/connected_components.hpp) | 無向グラフの連結成分 |
@@ -169,13 +175,14 @@ python tests/run_tests.py --debug
 | テスト | 比較内容 |
 | --- | --- |
 | [graph_test.cpp](tests/graph_test.cpp) | 950グラフと独立した最短路DP・削除/全列挙、1,200個の2-SAT、10万頂点の鎖 |
+| [recent_graph_test.cpp](tests/recent_graph_test.cpp) | ラベル列の素朴解、車輪の全点対最短路、木の全列挙、経路の直接集計と新5ヘッダを照合 |
 | [union_find_test.cpp](tests/union_find_test.cpp) | 20,000操作とBFSの連結性・既知の差・履歴の削除 |
 | [tree_test.cpp](tests/tree_test.cpp) | 180個の木/森の全頂点対、順序付き経路、素朴な全方位DP、HLDと遅延木、10万頂点の鎖 |
 | [flow_test.cpp](tests/flow_test.cpp) | 550個の全カット、420個の流量全列挙、1,000個の二部マッチングDP、深い増加路 |
 | [lazy_segtree_test.cpp](tests/lazy_segtree_test.cpp) | 8種類・独自ルールの境界条件と51,000回のランダム操作 |
 
 [run_tests.py](tests/run_tests.py) は各コードの `依存:` コメントをたどり、標準ヘッダを検証時だけ補ってコンパイルします。
-46コードそれぞれの依存展開と全コードのまとめ読み込み、README利用例、先頭のURL/SPDX、説明コメント、コード数、リンク、include行がないことも検査します。
+51コードそれぞれの依存展開と全コードのまとめ読み込み、README利用例、先頭のURL/SPDX、説明コメント、コード数、リンク、include行がないことも検査します。
 既存の `largeInt_mod.cpp` の符号付き/符号なし比較警告は、処理を変更せず維持しています。
 
 ## 必要なコードをまとめる
